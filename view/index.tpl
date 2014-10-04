@@ -27,6 +27,7 @@
         Eat<a href="#" class="button">Details</a><a href="#" class="button">Done</a>
       </div>
     </div>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/zepto/1.1.4/zepto.min.js"></script>
     <script type="text/javascript" src="//canjs.com/release/2.1.3/can.zepto.js"></script>
     <script type="text/javascript" src="javascript/app.js"></script>
   </body>
