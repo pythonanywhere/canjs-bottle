@@ -20,13 +20,13 @@
           </form>
         </div>
         <div class="grid__col grid__col--1-of-3 grid__col--centered margin-top-8px">
-          Run this shit<a href="#" class="button">Details</a><a href="#" class="button">Done</a>
+          Run this shit<button-details id="1"></button-details><a href="#" class="button">Done</a>
         </div>
         <div class="grid__col grid__col--1-of-3 grid__col--centered margin-top-8px">
-          Get out<a href="#" class="button">Details</a><a href="#" class="button">Done</a>
+          Get out<button-details></button-details><a href="#" class="button">Done</a>
         </div>
         <div class="grid__col grid__col--1-of-3 grid__col--centered margin-top-8px">
-          Eat<a href="#" class="button">Details</a><a href="#" class="button">Done</a>
+          Eat<button-details></button-details><a href="#" class="button">Done</a>
         </div>
       </div>
     </script>
