@@ -8,5 +8,6 @@ var start = (function(can, $) {
       }
     }
   });
+  $("#out").html(can.view("app", {}));
   console.log("fucking shit");
 })(can, $);
