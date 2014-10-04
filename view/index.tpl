@@ -5,7 +5,17 @@
     <link rel="stylesheet" href="/css/custom.css" />
   </head>
   <body>
-    This shit runs
+    <div class="grid">
+      <div class="grid__col grid__col--3-of-5 grid__col--centered">
+        <p>Run this shit</p>
+      </div>
+      <div class="grid__col grid__col--3-of-5 grid__col--centered">
+        <p>Get out</p>
+      </div>
+      <div class="grid__col grid__col--3-of-5 grid__col--centered">
+        <p>Eat</p>
+      </div>
+    </div>
     <script type="text/javascript" src="//canjs.com/release/2.1.3/can.zepto.js"></script>
     <script type="text/javascript" src="javascript/app.js"></script>
   </body>
