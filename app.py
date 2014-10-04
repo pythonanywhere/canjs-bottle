@@ -10,5 +10,9 @@ def index():
 def javascript(filename):
   "Get javascript files"
   return static_file(filename, root = "javascript")
+@app.route("/css/:filename")
+def css(filename):
+  "Get css file"
+  return static_file(filename, root = "css")
 
 run(app, host="localhost", port="8080")

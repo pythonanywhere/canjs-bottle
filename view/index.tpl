@@ -1,6 +1,8 @@
 <!doctype html>
 <html>
   <head>
+    <link rel="stylesheet" href="/css/toast.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
   </head>
   <body>
     This shit runs
