@@ -16,9 +16,16 @@ var start = (function(can, $, out, todos) {
       // get one todo
       return $.Deferred().resolve(todos[(+params.id) - 1]);
     },
+    create: function(attributes) {
+      // creates new todo
+      var last = todos[todos.length - 1];
+      $.extend(attributes, {id: last.id + 1, detail: "", tag: ""});
+      todos.push(attributes);
+      return $.Deferred().resolve(attributes);
+    },
     update: function(id, attributes) {
       // update one todo
-      $extend(todos[id - 1], attributes);
+      $.extend(todos[id - 1], attributes);
       return $.Deferred().resolve();
     },
     destroy: function() {
@@ -26,21 +33,42 @@ var start = (function(can, $, out, todos) {
       return $.Deferred().resolve();
     }
   }, {});
+  var TodoList = new Todo.List({});
   can.Component.extend({
     // router component
     // handles page routing
     tag: "router",
     events: {
       "/ route": function(data) {
+        console.log("home");
         $(out).html(can.view("javascript_view/home", {}));
       },
       "/details/:id route": function(data) {
+        console.log("details");
         // this is triggered for todo details
         $(out).html(can.view("javascript_view/details", {}));
+      },
+      "{Todo} created": function(Construct, event, todo) {
+        console.log("new");
+        TodoList.push(todo);
       },
       "{Todo} destroyed": function(Todo, event, destroyedTodo) {
         // this is triggered for todo done
         if(destroyedTodo.id == can.route.attr("id")) can.route.removeAttr("id");
+      }
+    }
+  });
+  can.Component.extend({
+    // todo-new
+    // make new todo
+    tag: "todo-new",
+    template: can.view("javascript_view/todo-new"),
+    scope: {
+      entered: function(context, element) {
+        new Todo({
+          name: can.trim(element.val())          
+        }).save();
+        element.val("");
       }
     }
   });
@@ -50,7 +78,7 @@ var start = (function(can, $, out, todos) {
     tag: "todos-list",
     template: can.view("javascript_view/todos-list"),
     scope: {
-      todos: new Todo.List({})
+      todos: TodoList.slice(0)
     }
   });
   can.Component.extend({
@@ -73,6 +101,7 @@ var start = (function(can, $, out, todos) {
 
   $(out).html(can.view("app", {}));
 
+  can.route(":page", {page: ""});
   can.route(":page/:id", {page: "", id: ""});
   can.route.ready();
   console.log("fucking shit");
