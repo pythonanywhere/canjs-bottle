@@ -10,6 +10,10 @@ def index():
 def javascript(filename):
   "Get javascript files"
   return static_file(filename, root = "javascript")
+@app.route("/javascript_view/:filename")
+def javascript_view(filename):
+  "Get javascript view files"
+  return static_file(filename, root = "javascript_view")
 @app.route("/css/:filename")
 def css(filename):
   "Get css file"

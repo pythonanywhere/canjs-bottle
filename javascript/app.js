@@ -1,15 +1,29 @@
-var start = (function(can, $) {
+var start = (function(can, $, out) {
+  can.Component.extend({
+    // router component
+    // handles page routing
+    tag: "router",
+    events: {
+      "/ route": function(data) {
+        $(out).html(can.view("javascript_view/home", {}));
+      },
+      "/details/:id route": function(data) {
+        $(out).html(can.view("javascript_view/details", {}));
+      }
+    }
+  });
   can.Component.extend({
     // button-details component
     // shows todo details
     tag: "button-details",
-    template: "<a href='#' class='button' can-click='clicked'>Details</a>",
+    template: "<a href='#!details/runthisthing' class='button'>Details</a>",
     scope: {
-      clicked: function() {
-        console.log("id", this.attr("lookfor"));
-      }
     }
   });
-  $("#out").html(can.view("app", {}));
+
+  $(out).html(can.view("app", {}));
+
+  can.route(":page/:id", {page: "", id: ""});
+  can.route.ready();
   console.log("fucking shit");
-})(can, $);
+})(can, $, "#out");
