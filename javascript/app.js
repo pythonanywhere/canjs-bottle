@@ -60,7 +60,7 @@ var start = (function(can, $, out, todos) {
     events: {
       "{Todo} created": function(Todo, event, newTodo) {
         console.log("new");
-        this.scope.attr("todos").push(todo);
+        this.scope.attr("todos").push(newTodo);
       },
       "{Todo} destroyed": function(Todo, event, destroyedTodo) {
         // this is triggered for todo done
