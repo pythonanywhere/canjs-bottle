@@ -47,16 +47,33 @@ var start = (function(can, $, out, todos) {
         console.log("details");
         // this is triggered for todo details
         $(out).html(can.view("javascript_view/details", {}));
-      },
-      "{Todo} created": function(Construct, event, todo) {
+      }
+    }
+  });
+  can.Component.extend({
+    // todos-list-wrap component
+    // common scope for todos list
+    tag: "todos-list-wrap",
+    scope: {
+      todos: TodoList.slice(0)
+    },
+    events: {
+      "{Todo} created": function(Todo, event, newTodo) {
         console.log("new");
-        TodoList.push(todo);
+        this.scope.attr("todos").push(todo);
       },
       "{Todo} destroyed": function(Todo, event, destroyedTodo) {
         // this is triggered for todo done
+        console.log("destroyed");
         if(destroyedTodo.id == can.route.attr("id")) can.route.removeAttr("id");
       }
     }
+  });
+  can.Component.extend({
+    // todos-list component
+    // lists todos
+    tag: "todos-list",
+    template: can.view("javascript_view/todos-list")
   });
   can.Component.extend({
     // todo-new
@@ -68,17 +85,9 @@ var start = (function(can, $, out, todos) {
         new Todo({
           name: can.trim(element.val())          
         }).save();
+        can.route.removeAttr("filter");
         element.val("");
       }
-    }
-  });
-  can.Component.extend({
-    // todos-list component
-    // lists todos
-    tag: "todos-list",
-    template: can.view("javascript_view/todos-list"),
-    scope: {
-      todos: TodoList.slice(0)
     }
   });
   can.Component.extend({

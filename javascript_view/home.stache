@@ -1,3 +1,5 @@
 <router>
-  <todos-list></todos-list>
+  <todos-list-wrap>
+    <todos-list></todos-list>
+  </todos-list-wrap>
 </router>
