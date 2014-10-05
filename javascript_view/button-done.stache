@@ -1,1 +1,1 @@
-<div class="button" can-click="clicked">Done</div>
+<div class="button" can-click="destroy">Done</div>

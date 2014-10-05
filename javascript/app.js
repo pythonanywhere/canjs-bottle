@@ -1,8 +1,8 @@
 var todos = [
   // todos
-  {id: 1, name: "Get the thing working", detail: "Nibh invenire convenire et cum"},
-  {id: 2, name: "Get out", detail: "Nibh invenire convenire et cum"},
-  {id: 3, name: "Drink and eat", detail: "Nibh invenire convenire et cum"}
+  {id: 1, name: "Get the thing working", detail: "Nibh invenire convenire et cum", tag: "stuff"},
+  {id: 2, name: "Get out", detail: "Nibh invenire convenire et cum", tag: "stuff"},
+  {id: 3, name: "Drink and eat", detail: "Nibh invenire convenire et cum", tag: "otherstuff"}
 ];
 var start = (function(can, $, out, todos) {
   var Todo = can.Model.extend({
@@ -38,9 +38,9 @@ var start = (function(can, $, out, todos) {
         // this is triggered for todo details
         $(out).html(can.view("javascript_view/details", {}));
       },
-      "/done/:id route": function(data) {
+      "{Todo} destroyed": function(Todo, event, destroyedTodo) {
         // this is triggered for todo done
-        console.log("done");
+        if(destroyedTodo.id == can.route.attr("id")) can.route.removeAttr("id");
       }
     }
   });
@@ -68,12 +68,7 @@ var start = (function(can, $, out, todos) {
     // button-done component
     // triggers todo remove
     tag: "button-done",
-    template: can.view("javascript_view/button-done"),
-    scope: {
-      clicked: function() {
-        can.route.attr({page: this.attr("page"), id: this.attr("lookfor")});
-      }
-    }
+    template: can.view("javascript_view/button-done")
   });
 
   $(out).html(can.view("app", {}));

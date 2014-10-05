@@ -1,1 +1,1 @@
-<a href='#!details' class='button' can-click='clicked'>Details</a>
+<div class="button" can-click="clicked">Details</div>
