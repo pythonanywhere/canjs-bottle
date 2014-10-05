@@ -27,15 +27,6 @@ var start = (function(can, $, out, todos) {
     }
   }, {});
   can.Component.extend({
-    // todos-list component
-    // lists todos
-    tag: "todos-list",
-    template: can.view("javascript_view/todos-list"),
-    scope: {
-      todos: new Todo.List({})
-    }
-  });
-  can.Component.extend({
     // router component
     // handles page routing
     tag: "router",
@@ -44,8 +35,22 @@ var start = (function(can, $, out, todos) {
         $(out).html(can.view("javascript_view/home", {}));
       },
       "/details/:id route": function(data) {
+        // this is triggered for todo details
         $(out).html(can.view("javascript_view/details", {}));
+      },
+      "/done/:id route": function(data) {
+        // this is triggered for todo done
+        console.log("done");
       }
+    }
+  });
+  can.Component.extend({
+    // todos-list component
+    // lists todos
+    tag: "todos-list",
+    template: can.view("javascript_view/todos-list"),
+    scope: {
+      todos: new Todo.List({})
     }
   });
   can.Component.extend({
@@ -56,6 +61,17 @@ var start = (function(can, $, out, todos) {
     scope: {
       clicked: function() {
         can.route.attr({id: this.attr("lookfor")});
+      }
+    }
+  });
+  can.Component.extend({
+    // button-done component
+    // triggers todo remove
+    tag: "button-done",
+    template: can.view("javascript_view/button-done"),
+    scope: {
+      clicked: function() {
+        can.route.attr({page: this.attr("page"), id: this.attr("lookfor")});
       }
     }
   });
