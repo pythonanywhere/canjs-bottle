@@ -25,6 +25,15 @@ var start = (function(can, $, out, todos) {
       // destroy todo
       return $.Deferred().resolve();
     }
+  }, {});
+  can.Component.extend({
+    // todos-list component
+    // lists todos
+    tag: "todos-list",
+    template: can.view("javascript_view/todos-list"),
+    scope: {
+      todos: new Todo.List({})
+    }
   });
   can.Component.extend({
     // router component
