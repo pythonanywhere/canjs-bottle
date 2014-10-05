@@ -52,8 +52,11 @@ var start = (function(can, $, out, todos) {
     // button-details component
     // shows todo details
     tag: "button-details",
-    template: "<a href='#!details/runthisthing' class='button'>Details</a>",
+    template: "<a href='#!details' class='button' can-click='clicked'>Details</a>",
     scope: {
+      clicked: function() {
+        can.route.attr({id: this.attr("lookfor")});
+      }
     }
   });
 

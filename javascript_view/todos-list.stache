@@ -1,1 +1,18 @@
-Todos list
+<div class="grid">
+  <div class="grid__col grid__col--1-of-4 grid__col--centered">
+    <form>
+      <input type="text" name="tag" placeholder="Look by tags" />
+    </form>
+  </div>
+  <div class="grid__col grid__col--1-of-4 grid__col--centered margin-top-16px">
+    <form>
+      <input type="text" name="title" placeholder="A task here" />
+      <input type="submit" value="Add" />
+    </form>
+  </div>
+  {{#each todos}}
+  <div class="grid__col grid__col--1-of-3 grid__col--centered margin-top-8px">
+    {{name}}<button-details lookfor="{{id}}"></button-details><a href="#" class="button">Done</a>
+  </div>
+  {{/each}}
+</div>
