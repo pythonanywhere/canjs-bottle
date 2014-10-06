@@ -1,0 +1,3 @@
+{{#if isTodosList}}
+<todos-list></todos-list>
+{{/if}}

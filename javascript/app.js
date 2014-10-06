@@ -38,34 +38,11 @@ var start = (function(can, $, out, todos) {
     // router component
     // handles page routing
     tag: "router",
-    events: {
-      "/ route": function(data) {
-        console.log("home");
-        $(out).html(can.view("javascript_view/home", {}));
-      },
-      "/details/:id route": function(data) {
-        console.log("details");
-        // this is triggered for todo details
-        $(out).html(can.view("javascript_view/details", {}));
-      }
-    }
-  });
-  can.Component.extend({
-    // todos-list-wrap component
-    // common scope for todos list
-    tag: "todos-list-wrap",
+    template: can.view("javascript_view/router"),
     scope: {
-      todos: TodoList.slice(0)
-    },
-    events: {
-      "{Todo} created": function(Todo, event, newTodo) {
-        console.log("new");
-        this.scope.attr("todos").push(newTodo);
-      },
-      "{Todo} destroyed": function(Todo, event, destroyedTodo) {
-        // this is triggered for todo done
-        console.log("destroyed");
-        if(destroyedTodo.id == can.route.attr("id")) can.route.removeAttr("id");
+      isTodosList: function() {
+        // are we seeing todos list
+        return this.attr("page") === "todosList";
       }
     }
   });
@@ -74,38 +51,6 @@ var start = (function(can, $, out, todos) {
     // lists todos
     tag: "todos-list",
     template: can.view("javascript_view/todos-list")
-  });
-  can.Component.extend({
-    // todo-new
-    // make new todo
-    tag: "todo-new",
-    template: can.view("javascript_view/todo-new"),
-    scope: {
-      entered: function(context, element) {
-        new Todo({
-          name: can.trim(element.val())          
-        }).save();
-        can.route.removeAttr("filter");
-        element.val("");
-      }
-    }
-  });
-  can.Component.extend({
-    // button-details component
-    // shows todo details
-    tag: "button-details",
-    template: can.view("javascript_view/button-details"),
-    scope: {
-      clicked: function() {
-        can.route.attr({id: this.attr("lookfor")});
-      }
-    }
-  });
-  can.Component.extend({
-    // button-done component
-    // triggers todo remove
-    tag: "button-done",
-    template: can.view("javascript_view/button-done")
   });
 
   $(out).html(can.view("app", {}));
