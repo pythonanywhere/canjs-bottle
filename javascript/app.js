@@ -50,7 +50,10 @@ var start = (function(can, $, out, todos) {
     // todos-list component
     // lists todos
     tag: "todos-list",
-    template: can.view("javascript_view/todos-list")
+    template: can.view("javascript_view/todos-list"),
+    scope: {
+      todos: TodoList.slice(0)
+    }
   });
 
   $(out).html(can.view("app", {}));
