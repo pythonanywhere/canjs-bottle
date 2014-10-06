@@ -1,1 +1,0 @@
-{{name}}<button-details page="details" lookfor="{{id}}"></button-details><button-done></button-done>
