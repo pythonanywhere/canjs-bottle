@@ -33,6 +33,16 @@ var start = (function(can, $, out, todos) {
       return $.Deferred().resolve();
     }
   }, {});
+  var TodoList = Todo.List.extend({
+    filter: function(check) {
+      // filter todos
+      var list = [];
+      this.each(function(todo) {
+        if(check(todo)) list.push(todo);
+      });
+      return list;
+    }
+  });
   can.Component.extend({
     // router component
     // handles page routing
@@ -53,6 +63,12 @@ var start = (function(can, $, out, todos) {
         name: can.trim(element.val())
       }).save();
       element.val("");      
+    },
+    tagFiltered: function(context, element) {
+      // filter todos according to tag
+      this.todos = this.todos.filter(function(todo) {
+        return todo.tag === element.val();
+      });
     }
   });
   can.Component.extend({
@@ -63,7 +79,7 @@ var start = (function(can, $, out, todos) {
     scope: function() {
       // make the scope for this component
       return new TodosListViewModel({
-        todos: new Todo.List({}),
+        todos: new TodoList({}),
         Todo: Todo
       });
     },
@@ -71,6 +87,9 @@ var start = (function(can, $, out, todos) {
       "{scope.Todo} created": function(Todo, event, newTodo) {
         // todo created
         this.scope.attr("todos").push(newTodo);
+      },
+      "{scope.todos} changed": function(a,b,c,d,e,f,g,h) {
+        console.log("todo change",d,e);
       }
     }
   });

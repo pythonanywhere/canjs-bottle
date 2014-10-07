@@ -1,5 +1,8 @@
 <div class="grid">
   <div class="grid__col grid__col--1-of-4 grid__col--centered margin-top-16px">
+      <input type="text" name="tagFilter" placeholder="Tag lookup" can-enter="tagFiltered" />
+  </div>
+  <div class="grid__col grid__col--1-of-4 grid__col--centered margin-top-16px">
       <input type="text" name="todo" placeholder="What needs to be done" can-enter="todoCreated" />
   </div>
   {{#each todos}}
