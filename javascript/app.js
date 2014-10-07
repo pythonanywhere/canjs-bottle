@@ -33,7 +33,6 @@ var start = (function(can, $, out, todos) {
       return $.Deferred().resolve();
     }
   }, {});
-  var TodoList = new Todo.List({});
   can.Component.extend({
     // router component
     // handles page routing
@@ -46,25 +45,30 @@ var start = (function(can, $, out, todos) {
       }
     }
   });
+  TodosListViewModel = can.Map.extend({
+    todoCreated: function(context, element) {
+      // new todo is created
+      var Todo = this.Todo;
+      new Todo({
+        name: can.trim(element.val())
+      }).save();
+      element.val("");      
+    }
+  });
   can.Component.extend({
     // todos-list component
     // lists todos
     tag: "todos-list",
     template: can.view("javascript_view/todos-list"),
-    scope: {
-      Todo: Todo,
-      todos: TodoList.slice(0),
-      todoCreated: function(context, element) {
-        // new todo is created
-        var Todo = this.Todo;
-        new Todo({
-          name: can.trim(element.val())
-        }).save();
-        element.val("");
-      }
+    scope: function() {
+      // make the scope for this component
+      return new TodosListViewModel({
+        todos: new Todo.List({}),
+        Todo: Todo
+      });
     },
     events: {
-      "{Todo} created": function(Todo, event, newTodo) {
+      "{scope.Todo} created": function(Todo, event, newTodo) {
         console.log("created");
       }
     }
