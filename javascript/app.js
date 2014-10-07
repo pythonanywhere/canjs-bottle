@@ -70,10 +70,9 @@ var start = (function(can, $, out, todos) {
     }
   });
 
-  $(out).html(can.view("app", {}));
+  $(out).html(can.view("app", {state: can.route}));
 
-  can.route(":page", {page: ""});
-  can.route(":page/:id", {page: "", id: ""});
+  can.route(":page/:id", {page: "todosList", id: ""});
   can.route.ready();
   console.log("fucking shit");
 })(can, $, "#out", todos);
