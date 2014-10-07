@@ -69,7 +69,8 @@ var start = (function(can, $, out, todos) {
     },
     events: {
       "{scope.Todo} created": function(Todo, event, newTodo) {
-        console.log("created");
+        // todo created
+        this.scope.attr("todos").push(newTodo);
       }
     }
   });
