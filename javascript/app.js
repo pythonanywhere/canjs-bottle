@@ -52,7 +52,21 @@ var start = (function(can, $, out, todos) {
     tag: "todos-list",
     template: can.view("javascript_view/todos-list"),
     scope: {
-      todos: TodoList.slice(0)
+      Todo: Todo,
+      todos: TodoList.slice(0),
+      todoCreated: function(context, element) {
+        // new todo is created
+        var Todo = this.Todo;
+        new Todo({
+          name: can.trim(element.val())
+        }).save();
+        element.val("");
+      }
+    },
+    events: {
+      "{Todo} created": function(Todo, event, newTodo) {
+        console.log("created");
+      }
     }
   });
 
