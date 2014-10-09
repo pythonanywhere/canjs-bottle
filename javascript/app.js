@@ -89,9 +89,6 @@ var start = (function(can, $, out, todos) {
       "{scope.Todo} created": function(Todo, event, newTodo) {
         // todo created
         this.scope.attr("todos").push(newTodo);
-      },
-      "{scope.todos} change": function(a,b,c,d,e,f,g,h) {
-        console.log("todo change",d,e);
       }
     }
   });
