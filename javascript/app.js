@@ -66,8 +66,10 @@ var start = (function(can, $, out, todos) {
     },
     tagFiltered: function(context, element) {
       // filter todos according to tag
-      this.todos = this.todos.filter(function(todo) {
-        return todo.tag === element.val();
+      var that = this;
+      if(!this.attr("filterTerm")) return this.todos;
+      return this.todos.filter(function(todo) {
+        return todo.tag === that.attr("filterTerm");
       });
     }
   });
