@@ -48,7 +48,7 @@ var start = (function(can, $, out, todos) {
     page: "todosList",
     isTodosList: function() {
       // are we seeing todos list
-      return this.attr("page") === "todosList";
+      return (this.attr("page") === "todosList" || typeof this.attr("page") === "undefined");
     }
   });
   var router = new Router();
@@ -77,6 +77,9 @@ var start = (function(can, $, out, todos) {
       return this.todos.filter(function(todo) {
         return todo.tag === that.attr("filterTerm");
       });
+    },
+    details: function(todo, el) {
+      can.route.attr("page", "details");
     }
   });
   can.Component.extend({
@@ -98,10 +101,11 @@ var start = (function(can, $, out, todos) {
       }
     }
   });
-  can.route(":page/:id", router);
+  can.route(":page");
+  can.route.map(router);
   can.route.ready();
 
-  $(out).html(can.view("app", {state: router}));
+  $(out).html(can.view("app", router));
 
   console.log("fucking shit");
 })(can, $, "#out", todos);

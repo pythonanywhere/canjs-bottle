@@ -7,7 +7,7 @@
   </div>
   {{#each tagFiltered}}
   <div class="grid__col grid__col--1-of-3 grid__col--centered margin-top-8px">
-    {{name}}<div class="button">Details</div><div class="button" can-click="destroy">Done</div>
+    {{name}}<div page="{page}" class="button" can-click="details">Details</div><div class="button" can-click="destroy">Done</div>
   </div>
   {{/each}}
 </div>
