@@ -92,10 +92,12 @@ var start = (function(can, $, out, todos) {
       }
     }
   });
-
-  $(out).html(can.view("app", {state: can.route}));
-
-  can.route(":page/:id", {page: "todosList", id: ""});
+  var appState = new can.Map({
+    // app state, page n stuff
+    page: "todosList"
+  });
+  can.route(":page/:id", appState);
   can.route.ready();
+  $(out).html(can.view("app", {state: appState}));
   console.log("fucking shit");
 })(can, $, "#out", todos);
