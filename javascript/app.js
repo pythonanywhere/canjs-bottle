@@ -43,16 +43,22 @@ var start = (function(can, $, out, todos) {
       return list;
     }
   });
+  var Router = can.Map.extend({
+    // app state, page n stuff
+    page: "todosList",
+    isTodosList: function() {
+      // are we seeing todos list
+      return this.attr("page") === "todosList";
+    }
+  });
+  var router = new Router();
   can.Component.extend({
     // router component
     // handles page routing
     tag: "router",
     template: can.view("javascript_view/router"),
-    scope: {
-      isTodosList: function() {
-        // are we seeing todos list
-        return this.attr("page") === "todosList";
-      }
+    scope: function() {
+      return router;
     }
   });
   TodosListViewModel = can.Map.extend({
@@ -92,12 +98,10 @@ var start = (function(can, $, out, todos) {
       }
     }
   });
-  var appState = new can.Map({
-    // app state, page n stuff
-    page: "todosList"
-  });
-  can.route(":page/:id", appState);
+  can.route(":page/:id", router);
   can.route.ready();
-  $(out).html(can.view("app", {state: appState}));
+
+  $(out).html(can.view("app", {state: router}));
+
   console.log("fucking shit");
 })(can, $, "#out", todos);
