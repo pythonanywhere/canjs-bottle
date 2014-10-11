@@ -75,14 +75,6 @@ var start = (function(can, $, out, todos, milestones) {
         if(check(todo)) list.push(todo);
       });
       return list;
-    },
-    find: function(check) {
-      // find a todo
-      var item = null;
-      this.each(function(todo) {
-        if(check(todo)) item = todo;
-      });
-      return item;
     }
   });
   var MilestoneList = Milestone.List.extend({
@@ -122,6 +114,8 @@ var start = (function(can, $, out, todos, milestones) {
     }
   });
   TodosListViewModel = can.Map.extend({
+    todos: todoList,
+    Todo: Todo,
     todoCreated: function(context, element) {
       // new todo is created
       var Todo = this.Todo;
@@ -150,10 +144,7 @@ var start = (function(can, $, out, todos, milestones) {
     template: can.view("javascript_view/todos-list"),
     scope: function() {
       // make the scope for this component
-      return new TodosListViewModel({
-        todos: todoList,
-        Todo: Todo
-      });
+      return new TodosListViewModel({});
     },
     events: {
       "{scope.Todo} created": function(Todo, event, newTodo) {
@@ -164,11 +155,13 @@ var start = (function(can, $, out, todos, milestones) {
   });
   TodoDetailsViewModel = can.Map.extend({
     todos: todoList,
-    find: function() {
+    oneTodo: function() {
       // find a todo
-      if(typeof this.attr("todo") === "undefined") this.attr("todo", this.attr("todos").find(function(todo) {
-        return (todo.id === this.attr("todoId")) ? true : false;
-      }));
+      var id = can.route.attr("id");
+      var todo = this.todos.filter(function(todo) {
+        return todo.id == id;
+      }).pop();
+      return todo;
     }
   });
   can.Component.extend({
@@ -177,7 +170,7 @@ var start = (function(can, $, out, todos, milestones) {
     tag: "todo-details",
     template: can.view("javascript_view/todo-details"),
     scope: function() {
-      return new TodoDetailsViewModel();
+      return new TodoDetailsViewModel({});
     }
   });
   MilestonesViewModel = can.Map.extend({
