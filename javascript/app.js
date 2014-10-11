@@ -234,6 +234,4 @@ var start = (function(can, $, out, todos, milestones) {
   can.route.ready();
 
   $(out).html(can.view("app", router));
-
-  console.log("fucking shit");
 })(can, $, "#out", todos, milestones);
