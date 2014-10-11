@@ -1,13 +1,13 @@
 <div class="grid">
   {{#each oneTodo}}
-  <div class="grid__col grid__col--1-of-4 grid__col--centered margin-top-16px">
-    <input type="text" placeholder="Name" value="{{name}}" can-enter="updateName" />
+  <div class="grid__col grid__col--1-of-4 grid__col--centered margin-top-16px text-center">
+    <input type="text" placeholder="Name" value="{{name}}" can-enter="updateName" class="inline-block" />
   </div>
-  <div class="grid__col grid__col--1-of-4 grid__col--centered margin-top-16px">
-    <input type="text" placeholder="Description" value="{{description}}" can-enter="updateDescription" />
+  <div class="grid__col grid__col--1-of-4 grid__col--centered margin-top-16px text-center">
+    <input type="text" placeholder="Description" value="{{description}}" can-enter="updateDescription" class="inline-block" />
   </div>
-  <div class="grid__col grid__col--1-of-4 grid__col--centered margin-top-16px">
-    <input type="text" placeholder="Tag" value="{{tag}}" can-enter="updateTag" />
+  <div class="grid__col grid__col--1-of-4 grid__col--centered margin-top-16px text-center">
+    <input type="text" placeholder="Tag" value="{{tag}}" can-enter="updateTag" class="inline-block" />
   </div>
   {{/each}}
 </div>

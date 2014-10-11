@@ -1,10 +1,10 @@
 <div class="grid">
-  <div class="grid__col grid__col--1-of-4 grid__col--centered margin-top-16px">
-    <input type="text" placeholder="Milestone" value="" can-enter="milestoneCreated" />
+  <div class="grid__col grid__col--1-of-4 grid__col--centered margin-top-16px text-center">
+    <input type="text" placeholder="Milestone" value="" can-enter="milestoneCreated" class="inline-block" />
   </div>
   {{#each getMilestones}}
-  <div class="grid__col grid__col--1-of-4 grid__col--centered margin-top-16px">
-  {{name}}<div class="button" can-click="destroy">Done</div>
+  <div class="grid__col grid__col--1-of-4 grid__col--centered margin-top-16px line text-center">
+  {{name}}<div class="button inline-block" can-click="destroy">Done</div>
   </div>
   {{/each}}
 </div>

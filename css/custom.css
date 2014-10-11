@@ -1,3 +1,21 @@
+body {
+  color: #333333;
+  font-family: Tahoma, Geneva, sans-serif;
+}
+.text-center {
+  text-align: center;
+}
+.inline-block {
+  display: inline-block;
+}
+.line {
+  background-color: #9dc45f;
+  padding: 10px 25px 10px 25px;
+  color: #fff;
+  text-shadow: 1px 1px 1px #949494;
+  -webkit-border-radius: 5px;
+  border: none;
+}
 .margin-top-16px {
   margin-top: 16px;
 }
@@ -6,6 +24,5 @@
 }
 .button {
   margin-left: 8px;
-  display: inline-block;
   color: cyan;
 }
