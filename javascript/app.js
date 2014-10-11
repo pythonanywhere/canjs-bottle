@@ -85,7 +85,7 @@ var start = (function(can, $, out, todos, milestones) {
       return item;
     }
   });
-  var MilestoneList = can.List.extend({
+  var MilestoneList = Milestone.List.extend({
     filter: function(check) {
       // filter milestones
       // todo make this common, same as above
@@ -184,8 +184,10 @@ var start = (function(can, $, out, todos, milestones) {
     milestones: milestoneList,
     getMilestones: function() {
       var id = can.route.attr("id");
-      return this.attr("milestones").filter(function(milestone) {
-        return (milestone.todo_id == id) ? true : false;
+      console.log("another id", this.attr("id"));
+      return this.milestones.filter(function(milestone) {
+        console.log("milestone", milestone.todo_id, id, milestone.todo_id == id);
+        return (milestone.todo_id == id);
       });
     }
   });

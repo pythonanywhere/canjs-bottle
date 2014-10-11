@@ -1,5 +1,7 @@
-{{#each getMilestones}}
-<div class="grid__col grid__col--1-of-4 grid__col--centered margin-top-16px">
-{{milestone.name}}
+<div class="grid">
+  {{#each getMilestones}}
+  <div class="grid__col grid__col--1-of-4 grid__col--centered margin-top-16px">
+  {{name}}
+  </div>
+  {{/each}}
 </div>
-{{/each}}
