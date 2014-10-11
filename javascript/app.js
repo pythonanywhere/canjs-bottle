@@ -106,6 +106,12 @@ var start = (function(can, $, out, todos) {
       }
     }
   });
+  can.Component.extend({
+    // todo details component
+    // show details of todo
+    tag: "todo-details",
+    template: can.view("javascript_view/todo-details")
+  })
   can.route(":page");
   can.route.map(router);
   can.route.ready();

@@ -2,5 +2,5 @@
 <todos-list></todos-list>
 {{/if}}
 {{#if isTodoDetails}}
-todo details
+<todo-details></todo-details>
 {{/if}}
