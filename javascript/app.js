@@ -115,14 +115,18 @@ var start = (function(can, $, out, todos, milestones) {
     }
   });
   TodosListViewModel = can.Map.extend({
+    // listing todos and stuff
     todos: todoList,
     Todo: Todo,
     todoCreated: function(context, element) {
       // new todo is created
+      var that = this;
       var Todo = this.Todo;
       new Todo({
         name: can.trim(element.val())
-      }).save();
+      }).save(function(todo) {
+        that.todos.push(todo);
+      });
       element.val("");      
     },
     tagFiltered: function(context, element) {
@@ -146,16 +150,10 @@ var start = (function(can, $, out, todos, milestones) {
     scope: function() {
       // make the scope for this component
       return new TodosListViewModel({});
-    },
-    events: {
-      "{scope.Todo} created": function(Todo, event, newTodo) {
-        // todo created
-        console.log("todo new");
-        this.scope.attr("todos").push(newTodo);
-      }
     }
   });
   TodoDetailsViewModel = can.Map.extend({
+    // doing stuff with todo details
     todos: todoList,
     oneTodo: function() {
       // find a todo
@@ -199,20 +197,26 @@ var start = (function(can, $, out, todos, milestones) {
     }
   });
   MilestonesViewModel = can.Map.extend({
+    // doing stuff with milestones
     milestones: milestoneList,
     Milestone: Milestone,
     getMilestones: function() {
+      // get milestones
       var id = can.route.attr("id");
       return this.milestones.filter(function(milestone) {
         return (milestone.todo_id == id);
       });
     },
     milestoneCreated: function(context, element) {
+      // milestone created
+      var that = this;
       var Milestone = this.Milestone;
       new Milestone({
         name: element.val(),
         todo_id: parseInt(can.route.attr("id"))
-      }).save();
+      }).save(function(milestone) {
+        that.milestones.push(milestone);
+      });
       element.val("");
     }
   });
@@ -223,12 +227,6 @@ var start = (function(can, $, out, todos, milestones) {
     template: can.view("javascript_view/milestones-list"),
     scope: function() {
       return new MilestonesViewModel({});
-    },
-    events: {
-      "{} created": function(Milestone, event, newMilestone) {
-        console.log("new", newMilestone);
-        this.scope.attr("milestones").push(newMilestone);
-      }
     }
   });
   can.route(":page/:id");
