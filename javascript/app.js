@@ -184,9 +184,7 @@ var start = (function(can, $, out, todos, milestones) {
     milestones: milestoneList,
     getMilestones: function() {
       var id = can.route.attr("id");
-      console.log("another id", this.attr("id"));
       return this.milestones.filter(function(milestone) {
-        console.log("milestone", milestone.todo_id, id, milestone.todo_id == id);
         return (milestone.todo_id == id);
       });
     }
