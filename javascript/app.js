@@ -5,9 +5,10 @@ var todos = [
   {id: 3, name: "Drink and eat", detail: "Nibh invenire convenire et cum", tag: "otherstuff"}
 ];
 var milestones = [
-{id: 1, name: "Find info", todo_id: 1},
-{id: 2, name: "Write things", todo_id: 1},
-{id: 3, name: "Get dressed", todo_id: 2}
+  // milestones
+  {id: 1, name: "Find info", todo_id: 1},
+  {id: 2, name: "Write things", todo_id: 1},
+  {id: 3, name: "Get dressed", todo_id: 2}
 ];
 var start = (function(can, $, out, todos, milestones) {
   var Todo = can.Model.extend({
@@ -52,7 +53,7 @@ var start = (function(can, $, out, todos, milestones) {
     create: function(attributes) {
       // creates new milestone
       var last = milestones[milestones.length - 1];
-      $.extend(attributes, {id: last.id + 1, detail: "", tag: ""});
+      $.extend(attributes, {id: last.id + 1});
       milestones.push(attributes);
       return $.Deferred().resolve(attributes);
     },
@@ -89,8 +90,8 @@ var start = (function(can, $, out, todos, milestones) {
       // filter milestones
       // todo make this common, same as above
       var list = [];
-      this.each(function(todo) {
-        if(check(todo)) list.push(todo);
+      this.each(function(milestone) {
+        if(check(milestone)) list.push(milestone);
       });
       return list;
     }
@@ -179,13 +180,25 @@ var start = (function(can, $, out, todos, milestones) {
       return new TodoDetailsViewModel();
     }
   });
+  MilestonesViewModel = can.Map.extend({
+    milestones: milestoneList,
+    getMilestones: function() {
+      var id = can.route.attr("id");
+      return this.attr("milestones").filter(function(milestone) {
+        return (milestone.todo_id == id) ? true : false;
+      });
+    }
+  });
   can.Component.extend({
     // milestones list component
     // list milestones
     tag: "milestones-list",
-    template: can.view("javascript_view/milestones-list")
+    template: can.view("javascript_view/milestones-list"),
+    scope: function() {
+      return new MilestonesViewModel({});
+    }
   });
-  can.route(":page");
+  can.route(":page/:id");
   can.route.map(router);
   can.route.ready();
 
