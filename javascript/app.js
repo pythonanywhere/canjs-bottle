@@ -4,7 +4,12 @@ var todos = [
   {id: 2, name: "Get out", detail: "Nibh invenire convenire et cum", tag: "stuff"},
   {id: 3, name: "Drink and eat", detail: "Nibh invenire convenire et cum", tag: "otherstuff"}
 ];
-var start = (function(can, $, out, todos) {
+var milestones = [
+{id: 1, name: "Find info", todo_id: 1},
+{id: 2, name: "Write things", todo_id: 1},
+{id: 3, name: "Get dressed", todo_id: 2}
+];
+var start = (function(can, $, out, todos, milestones) {
   var Todo = can.Model.extend({
     // todo model
     // fetches things and so on
@@ -33,6 +38,34 @@ var start = (function(can, $, out, todos) {
       return $.Deferred().resolve();
     }
   }, {});
+  var Milestone = can.Model.extend({
+    // milestone model
+    // fetches things and so on
+    findAll: function() {
+      // get all milestones
+      return $.Deferred().resolve(milestones);
+    },
+    findOne: function(params) {
+      // get one milestone
+      return $.Deferred().resolve(milestones[(+params.id) - 1]);
+    },
+    create: function(attributes) {
+      // creates new milestone
+      var last = milestones[milestones.length - 1];
+      $.extend(attributes, {id: last.id + 1, detail: "", tag: ""});
+      milestones.push(attributes);
+      return $.Deferred().resolve(attributes);
+    },
+    update: function(id, attributes) {
+      // update one milestone
+      $.extend(milestones[id - 1], attributes);
+      return $.Deferred().resolve();
+    },
+    destroy: function() {
+      // destroy milestone
+      return $.Deferred().resolve();
+    }
+  }, {});
   var TodoList = Todo.List.extend({
     filter: function(check) {
       // filter todos
@@ -51,7 +84,19 @@ var start = (function(can, $, out, todos) {
       return item;
     }
   });
+  var MilestoneList = can.List.extend({
+    filter: function(check) {
+      // filter milestones
+      // todo make this common, same as above
+      var list = [];
+      this.each(function(todo) {
+        if(check(todo)) list.push(todo);
+      });
+      return list;
+    }
+  });
   var todoList = new TodoList({});
+  var milestoneList = new MilestoneList({});
   var Router = can.Map.extend({
     // app state, page n stuff
     page: "todosList",
@@ -134,6 +179,12 @@ var start = (function(can, $, out, todos) {
       return new TodoDetailsViewModel();
     }
   });
+  can.Component.extend({
+    // milestones list component
+    // list milestones
+    tag: "milestones-list",
+    template: can.view("javascript_view/milestones-list")
+  });
   can.route(":page");
   can.route.map(router);
   can.route.ready();
@@ -141,4 +192,4 @@ var start = (function(can, $, out, todos) {
   $(out).html(can.view("app", router));
 
   console.log("fucking shit");
-})(can, $, "#out", todos);
+})(can, $, "#out", todos, milestones);

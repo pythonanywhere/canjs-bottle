@@ -2,5 +2,5 @@
 <todos-list></todos-list>
 {{/if}}
 {{#if isTodoDetails}}
-<todo-details todoId="{{id}}"></todo-details>
+<todo-details id="{{id}}"></todo-details>
 {{/if}}
