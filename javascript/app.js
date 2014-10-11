@@ -49,6 +49,10 @@ var start = (function(can, $, out, todos) {
     isTodosList: function() {
       // are we seeing todos list
       return (this.attr("page") === "todosList" || typeof this.attr("page") === "undefined");
+    },
+    isTodoDetails: function() {
+      // are we seeing todo details
+      return this.attr("page") === "todoDetails";
     }
   });
   var router = new Router();
@@ -78,8 +82,9 @@ var start = (function(can, $, out, todos) {
         return todo.tag === that.attr("filterTerm");
       });
     },
-    details: function(todo, el) {
-      can.route.attr("page", "details");
+    todoDetails: function(todo, element) {
+      // todo details
+      can.route.attr("page", element.attr("page"));
     }
   });
   can.Component.extend({

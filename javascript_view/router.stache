@@ -1,3 +1,6 @@
 {{#if isTodosList}}
 <todos-list></todos-list>
 {{/if}}
+{{#if isTodoDetails}}
+todo details
+{{/if}}
