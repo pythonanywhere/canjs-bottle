@@ -41,11 +41,21 @@ var start = (function(can, $, out, todos) {
         if(check(todo)) list.push(todo);
       });
       return list;
+    },
+    find: function(check) {
+      // find a todo
+      var item = null;
+      this.each(function(todo) {
+        if(check(todo)) item = todo;
+      });
+      return item;
     }
   });
+  var todoList = new TodoList({});
   var Router = can.Map.extend({
     // app state, page n stuff
     page: "todosList",
+    id: "",
     isTodosList: function() {
       // are we seeing todos list
       return (this.attr("page") === "todosList" || typeof this.attr("page") === "undefined");
@@ -84,7 +94,7 @@ var start = (function(can, $, out, todos) {
     },
     todoDetails: function(todo, element) {
       // todo details
-      can.route.attr("page", element.attr("page"));
+      can.route.attr({"id": todo.id, "page": element.attr("page")});
     }
   });
   can.Component.extend({
@@ -95,7 +105,7 @@ var start = (function(can, $, out, todos) {
     scope: function() {
       // make the scope for this component
       return new TodosListViewModel({
-        todos: new TodoList({}),
+        todos: todoList,
         Todo: Todo
       });
     },
@@ -106,12 +116,24 @@ var start = (function(can, $, out, todos) {
       }
     }
   });
+  TodoDetailsViewModel = can.Map.extend({
+    todos: todoList,
+    find: function() {
+      // find a todo
+      if(typeof this.attr("todo") === "undefined") this.attr("todo", this.attr("todos").find(function(todo) {
+        return (todo.id === this.attr("todoId")) ? true : false;
+      }));
+    }
+  });
   can.Component.extend({
     // todo details component
     // show details of todo
     tag: "todo-details",
-    template: can.view("javascript_view/todo-details")
-  })
+    template: can.view("javascript_view/todo-details"),
+    scope: function() {
+      return new TodoDetailsViewModel();
+    }
+  });
   can.route(":page");
   can.route.map(router);
   can.route.ready();
