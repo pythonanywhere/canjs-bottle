@@ -55,6 +55,7 @@ var start = (function(can, $, out, todos, milestones) {
       var last = milestones[milestones.length - 1];
       $.extend(attributes, {id: last.id + 1});
       milestones.push(attributes);
+      console.log("create", attributes);
       return $.Deferred().resolve(attributes);
     },
     update: function(id, attributes) {
@@ -149,6 +150,7 @@ var start = (function(can, $, out, todos, milestones) {
     events: {
       "{scope.Todo} created": function(Todo, event, newTodo) {
         // todo created
+        console.log("todo new");
         this.scope.attr("todos").push(newTodo);
       }
     }
@@ -198,11 +200,20 @@ var start = (function(can, $, out, todos, milestones) {
   });
   MilestonesViewModel = can.Map.extend({
     milestones: milestoneList,
+    Milestone: Milestone,
     getMilestones: function() {
       var id = can.route.attr("id");
       return this.milestones.filter(function(milestone) {
         return (milestone.todo_id == id);
       });
+    },
+    milestoneCreated: function(context, element) {
+      var Milestone = this.Milestone;
+      new Milestone({
+        name: element.val(),
+        todo_id: parseInt(can.route.attr("id"))
+      }).save();
+      element.val("");
     }
   });
   can.Component.extend({
@@ -212,6 +223,12 @@ var start = (function(can, $, out, todos, milestones) {
     template: can.view("javascript_view/milestones-list"),
     scope: function() {
       return new MilestonesViewModel({});
+    },
+    events: {
+      "{} created": function(Milestone, event, newMilestone) {
+        console.log("new", newMilestone);
+        this.scope.attr("milestones").push(newMilestone);
+      }
     }
   });
   can.route(":page/:id");
