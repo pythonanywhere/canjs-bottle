@@ -1,14 +1,14 @@
 <div class="grid">
-  {{#with oneTodo}}
+  {{#each oneTodo}}
   <div class="grid__col grid__col--1-of-4 grid__col--centered margin-top-16px">
-    <input type="text" placeholder="Name" value="{{name}}" />
+    <input type="text" placeholder="Name" value="{{name}}" can-enter="updateName" />
   </div>
   <div class="grid__col grid__col--1-of-4 grid__col--centered margin-top-16px">
-    <input type="text" placeholder="Description" value="" />
+    <input type="text" placeholder="Description" value="{{description}}" can-enter="updateDescription" />
   </div>
   <div class="grid__col grid__col--1-of-4 grid__col--centered margin-top-16px">
-    <input type="text" placeholder="Tag" value="" />
+    <input type="text" placeholder="Tag" value="{{tag}}" can-enter="updateTag" />
   </div>
-  {{/with}}
+  {{/each}}
 </div>
 <milestones-list></milestones-list>

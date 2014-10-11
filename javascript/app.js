@@ -158,10 +158,33 @@ var start = (function(can, $, out, todos, milestones) {
     oneTodo: function() {
       // find a todo
       var id = can.route.attr("id");
-      var todo = this.todos.filter(function(todo) {
+      return todo = this.todos.filter(function(todo) {
         return todo.id == id;
-      }).pop();
-      return todo;
+      });
+    },
+    updateName: function(todo, element) {
+      // update name
+      if(element.val() != "") {
+        todo.attr({
+          name: element.val()
+        });
+      }
+    },
+    updateDescription: function(todo, element) {
+      // update description
+      if(element.val() != "") {
+        todo.attr({
+          description: element.val()
+        });
+      }
+    },
+    updateTag: function(todo, element) {
+      // update tag
+      if(element.val() != "") {
+        todo.attr({
+          tag: element.val()
+        });
+      }
     }
   });
   can.Component.extend({
