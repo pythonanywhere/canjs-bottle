@@ -1,13 +1,13 @@
 <div class="grid">
   <div class="grid__col grid__col--1-of-4 grid__col--centered margin-top-16px text-center">
-      <input type="text" name="tagFilter" placeholder="Tag lookup" can-value="filterTerm" class="inline-block" />
+      <input type="text" name="tagFilter" placeholder="Tag lookup" can-value="filterTerm" class="inline-block input-line" />
   </div>
   <div class="grid__col grid__col--1-of-4 grid__col--centered margin-top-16px text-center">
-      <input type="text" name="todo" placeholder="What needs to be done" can-enter="todoCreated" class="inline-block" />
+      <input type="text" name="todo" placeholder="What needs to be done" can-enter="todoCreated" class="inline-block input-line" />
   </div>
   {{#each tagFiltered}}
-  <div class="grid__col grid__col--1-of-3 grid__col--centered margin-top-8px line text-center">
-    {{name}}<div class="button inline-block" can-click="todoDetails" page="todoDetails">Details</div><div class="button inline-block" can-click="destroy">Done</div>
+  <div class="grid__col grid__col--1-of-3 grid__col--centered margin-top-16px line">
+    {{name}}<div class="button inline-block" can-click="destroy">Done</div><div class="button inline-block" can-click="todoDetails" page="todoDetails">Details</div>
   </div>
   {{/each}}
 </div>

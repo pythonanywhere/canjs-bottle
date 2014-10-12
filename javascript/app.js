@@ -2,13 +2,29 @@ var todos = [
   // todos
   {id: 1, name: "Get the thing working", detail: "Nibh invenire convenire et cum", tag: "stuff"},
   {id: 2, name: "Get out", detail: "Nibh invenire convenire et cum", tag: "stuff"},
-  {id: 3, name: "Drink and eat", detail: "Nibh invenire convenire et cum", tag: "otherstuff"}
+  {id: 3, name: "Drink and eat", detail: "Nibh invenire convenire et cum", tag: "otherstuff"},
+  {id: 4, name: "Cook stuff", detail: "Nibh invenire convenire et cum", tag: "otherstuff"},
+  {id: 5, name: "Drink again", detail: "Nibh invenire convenire et cum", tag: "otherstuff"},
+  {id: 6, name: "See a movie", detail: "Nibh invenire convenire et cum", tag: "otherstuff"},
+  {id: 7, name: "Find good shopping", detail: "Nibh invenire convenire et cum", tag: "otherstuff"},
+  {id: 8, name: "Chill", detail: "Nibh invenire convenire et cum", tag: "otherstuff"},
+  {id: 9, name: "Sleep", detail: "Nibh invenire convenire et cum", tag: "otherstuff"},
+  {id: 10, name: "Eat breakfast", detail: "Nibh invenire convenire et cum", tag: "otherstuff"},
+  {id: 11, name: "Look new tricks", detail: "Nibh invenire convenire et cum", tag: "otherstuff"},
+  {id: 12, name: "Meet with friends", detail: "Nibh invenire convenire et cum", tag: "otherstuff"}
 ];
 var milestones = [
   // milestones
   {id: 1, name: "Find info", todo_id: 1},
   {id: 2, name: "Write things", todo_id: 1},
-  {id: 3, name: "Get dressed", todo_id: 2}
+  {id: 3, name: "Get dressed", todo_id: 2},
+  {id: 4, name: "Go shopping", todo_id: 3},
+  {id: 5, name: "Clean things", todo_id: 3},
+  {id: 6, name: "Chop up", todo_id: 3},
+  {id: 7, name: "Simmer", todo_id: 3},
+  {id: 8, name: "Make sauce", todo_id: 3},
+  {id: 9, name: "Add spices", todo_id: 3},
+  {id: 10, name: "Serve", todo_id: 3}
 ];
 var start = (function(can, $, out, todos, milestones) {
   var Todo = can.Model.extend({
